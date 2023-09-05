@@ -10,7 +10,8 @@ import {
   ChakraProvider,
   useColorMode,
   Icon,
-  Center
+  Center,
+  color
 } from '@chakra-ui/react';
 import { extendTheme } from '@chakra-ui/react';
 import {SunIcon,MoonIcon } from '@chakra-ui/icons'// Import sun and moon icons
@@ -89,18 +90,28 @@ function App() {
   return (
     <ChakraProvider theme={customTheme}>
       {/* <CSSReset /> */}
-      <Box mt={10} w={'full'} h={'90vh'}> {/* Box with shadow */}
-        <Container maxW="container.xl"  h={'full'} boxShadow="lg" >
+      <Box mt={10} w={'full'} h={'120vh'}> {/* Box with shadow */}
+        <Container maxW="container.xl"  h={'full'} boxShadow="lg" style={{
+        backgroundColor: '#C0DED0',
+        padding: '20px',
+        borderRadius: '5px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }}>
           {/* <Flex align="center" justify="space-around" mb="4"> */}
-            <Box>
+            <Box style={{
+        backgroundColor: '#076060',
+        padding: '20px',
+        borderRadius: '5px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }}>
               <Heading size="xl" mb="2">
                <Center 
-                  bgGradient='linear(to-l, #7928CA, #FF0080)' bgClip='text'
+                  bgGradient='linear(to-l, #7928CA, #FF0)' bgClip='text'
                   fontSize='5xl'
                   fontWeight='extrabold'
-                > Code Converter & Debugger App</Center>
+                > Converter & Debugger </Center>
               </Heading>
-              <Center fontSize="2xl" fontWeight={'bold'}>Convert your code from one language to another</Center>
+              <Center fontSize="2xl" style={{color:"#FFFFFF"}} fontWeight={'bold'}>Convert your code </Center>
             </Box>
             <Button onClick={toggleColorMode} ml="95%" mb={10}> {/* Toggling logo at top-right corner */}
               <Icon 
@@ -109,18 +120,24 @@ function App() {
               />
             </Button>
           {/* </Flex> */}
-          <Flex flexDirection={{ base: 'column', md: 'row' }} gap="4"  h={'fit-content'}>
-            <Box flex="1">
-              <Select
+          <Flex flexDirection={{ base: 'column', md: 'row' }} gap="4"  h={'fit-content'}  style={{
+        backgroundColor: '#076060',
+        padding: '20px',
+        borderRadius: '5px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      }} >
+            <Box flex="1" >
+              <Select  color='white'
                 value={selectedFromLanguage}
                 onChange={(e) => setSelectedFromLanguage(e.target.value)}
                 mb="4"
               >
+            
+                <option value="C++">C++</option>
+                <option value="C">C</option>
                 <option value="JavaScript">JavaScript</option>
                 <option value="Python">Python</option>
                 <option value="Java">Java</option>
-                <option value="C++">C++</option>
-                <option value="C">C</option>
                 {/* Add more language options here */}
               </Select>
               <Textarea
@@ -128,29 +145,33 @@ function App() {
                 onChange={(e) => setInputCode(e.target.value)}
                 placeholder="Enter your code here..."
                 size="lg"
+                style={{ minHeight: '400px' , backgroundColor: '#C0DED0',
+                padding: '20px',
+                borderRadius: '5px',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', }}
                 resize="vertical"
                 bg={colorMode === 'light' ? 'white' : 'gray.800'}
                 color={colorMode === 'light' ? 'black' : 'white'}
+             
               />
             </Box>
             <Box flex="1">
               {/* <Box> */}
               {/* <VStack spacing="4"> */}
                 
-                <Select
+                <Select color='white'
                   value={selectedToLanguage}
                   onChange={(e) => setSelectedToLanguage(e.target.value)}
                 >
+                
+                  <option value="C++" >C++</option>
+                  <option value="C">C</option>
                   <option value="Python">Python</option>
                   <option value="JavaScript">JavaScript</option>
                   <option value="Java">Java</option>
-                  <option value="C++">C++</option>
-                  <option value="C">C</option>
                   {/* Add more language options here */}
                 </Select>
-                <Button colorScheme="twitter" w={'50%'} onClick={handleConvert} display={'block'} m={'auto'} mt={5} mb={5}>
-                  Convert
-                </Button>
+              
 
                 <Textarea
                   value={convertedCode}
@@ -158,23 +179,33 @@ function App() {
                   placeholder="Converted code will appear here..."
                   size="lg"
                   resize="vertical"
+                  style={{ minHeight: '400px', backgroundColor: '#C0DED0' ,marginTop:"15px"}}
                   bg={colorMode === 'light' ? 'white' : 'gray.800'}
                   color={colorMode === 'light' ? 'black' : 'white'}
                 />
                 </Box>
                 <Box flex="1">
-                <Button colorScheme="twitter" w={'50%'} onClick={handleDebug} display={'block'} m={'auto'}  mb={5}>
-                  Debug
-                </Button>
+            
                 <Textarea
                   value={debuggedCode}
                   isReadOnly
                   placeholder="Debugged code will appear here..."
                   size="lg"
+                  style={{ minHeight: '400px', backgroundColor: '#C0DED0' ,marginTop:"54px" }}
                   resize="vertical"
                   bg={colorMode === 'light' ? 'white' : 'gray.800'}
                   color={colorMode === 'light' ? 'black' : 'white'}
                 />
+                
+                 <Flex  gap="10px">
+                 <Button colorScheme="twitter" w={'50%'} onClick={handleConvert} display={'block'} m={'auto'} mt={5} mb={5}>
+                  Convert
+                </Button>
+                <Button colorScheme="twitter" w={'50%'} onClick={handleDebug} display={'block'} m={'auto'}  mb={5}>
+                  Debug
+                </Button>
+                 </Flex>
+
               {/* </VStack> */}
               </Box>
             
